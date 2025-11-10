@@ -54,9 +54,7 @@ Let me know 👣
     2.which edition do you    need ❓
 
     -1st edition 🌸
-
     -2nd edition⚖
-
     -special edition⚜
 
 Feel the emotion of poetry ♥
@@ -65,7 +63,6 @@ Feel the emotion of poetry ♥
 Here the price List
 
 First edition price Rs.500
-
 Second editon price Rs.600
 
 Special edition price Rs.800(with a book🔖 mark,burn page📜 etc)`;
