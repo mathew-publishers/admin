@@ -46,20 +46,31 @@ function createWhatsAppLink(phoneNumber, name = '') {
         return null;
     }
 
-    const welcomeMessage = `Hello${name ? ' ' + name : ''}! Thank you for your form submission. We're contacting you from our support team. How can we assist you today?`;
+    const welcomeMessage = `Hello${name ? ' ' + name : ''}! Thank you for your form submission. We're contacting you from Mathewz publishers. How can we assist you today?
+
+Let me know 👣 
+
+1. how many books do you need ❓
+
+    2.which edition do you    need ❓
+
+    -1st edition 🌸
+    -2nd edition⚖
+    -special edition⚜
+
+Feel the emotion of poetry ♥
+
+
+Here the price List
+
+First edition price Rs.500
+Second editon price Rs.600
+
+Special edition price Rs.800(with a book🔖 mark,burn page📜 etc)`;
+    
     const encodedMessage = encodeURIComponent(welcomeMessage);
     
     return `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
-}
-
-function openWhatsApp(phoneNumber, name) {
-    const whatsappLink = createWhatsAppLink(phoneNumber, name);
-    
-    if (whatsappLink) {
-        window.open(whatsappLink, '_blank');
-    } else {
-        showSweetAlert('Invalid phone number format. Please check the contact number.', 'error');
-    }
 }
 
 // Check authentication
