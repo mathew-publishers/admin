@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Form Management</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">
+            Loading Dashboard<span class="loading-dots">...</span>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="logout-modal" id="logoutModal">
+        <div class="logout-modal-content">
+            <h4>Confirm Logout</h4>
+            <p>Are you sure you want to logout from the admin dashboard?</p>
+            <div class="logout-modal-buttons">
+                <button class="btn-confirm" onclick="confirmLogout()">Yes, Logout</button>
+                <button class="btn-cancel" onclick="cancelLogout()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="container-fluid dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2>Admin Dashboard</h2>
+                    <p>Form Submissions Management System</p>
+                    <span id="connectionStatus" class="status-loading">Connecting to database...</span>
+                </div>
+                <div class="col-md-4 text-right">
+                    <button class="btn btn-logout" onclick="showLogoutConfirmation()">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h3 id="totalSubmissions">0</h3>
+                    <p>Total Submissions</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h3 id="todaySubmissions">0</h3>
+                    <p>Today's Submissions</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h3 id="dataAge">0s</h3>
+                    <p>Last Updated</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="section-title mb-0">Data Export</h5>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-download" onclick="exportToPDF()" id="pdfBtn">
+                        Download PDF
+                    </button>
+                    <button class="btn btn-download" onclick="exportToCSV()" id="csvBtn">
+                        Download CSV
+                    </button>
+                    <button class="btn btn-download" onclick="loadData()" id="refreshBtn">
+                        Refresh Data
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="section-title mb-0">All Submissions</h5>
+                <div>
+                    <span class="data-count" id="dataCount">0 records</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Address</th>
+        <th>Notes</th>
+        <th>Action</th>
+    </tr>
+</thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <td colspan="7" class="text-center py-5">
+                                <div class="spinner-border text-primary mb-3" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <br>
+                                <span class="text-muted">Loading submission data...</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
