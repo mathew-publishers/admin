@@ -13,17 +13,17 @@ function formatPhoneNumber(phone) {
     
     // If starts with 0, assume Sri Lanka and convert to international format
     if (clean.startsWith('0')) {
-        return '+94' + clean.substring(1);
+        return '94' + clean.substring(1);
     }
     
     // If already has country code but without +, add it
     if (clean.startsWith('94') && clean.length === 11) {
-        return '+' + clean;
+        return clean;
     }
     
     // If already in international format, return as is
     if (clean.startsWith('94') && clean.length === 11) {
-        return '+' + clean;
+        return clean;
     }
     
     // If it's already in international format with +, return as is
@@ -37,9 +37,8 @@ function formatPhoneNumber(phone) {
     }
     
     // Default: assume it's a Sri Lankan number without leading zero
-    return '+94' + clean;
+    return '94' + clean;
 }
-
 function createWhatsAppLink(phoneNumber, name = '') {
     const formattedNumber = formatPhoneNumber(phoneNumber);
     if (!formattedNumber) {
@@ -55,7 +54,9 @@ Let me know 👣
     2.which edition do you    need ❓
 
     -1st edition 🌸
+
     -2nd edition⚖
+
     -special edition⚜
 
 Feel the emotion of poetry ♥
@@ -64,6 +65,7 @@ Feel the emotion of poetry ♥
 Here the price List
 
 First edition price Rs.500
+
 Second editon price Rs.600
 
 Special edition price Rs.800(with a book🔖 mark,burn page📜 etc)`;
@@ -72,16 +74,23 @@ Special edition price Rs.800(with a book🔖 mark,burn page📜 etc)`;
     
     return `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
 }
+
 function openWhatsApp(phoneNumber, name) {
     const whatsappLink = createWhatsAppLink(phoneNumber, name);
     
     if (whatsappLink) {
-        window.open(whatsappLink, '_blank');
+        // Create a temporary link element and click it
+        const link = document.createElement('a');
+        link.href = whatsappLink;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     } else {
-        showSweetAlert('Invalid phone number format. Please check the contact number.', 'error');
+        alert('Invalid phone number format. Please check the contact number.');
     }
 }
-
 // Check authentication
 function checkAuth() {
     const isLoggedIn = localStorage.getItem('adminLoggedIn');
