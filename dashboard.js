@@ -72,6 +72,15 @@ Special edition price Rs.800(with a book🔖 mark,burn page📜 etc)`;
     
     return `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
 }
+function openWhatsApp(phoneNumber, name) {
+    const whatsappLink = createWhatsAppLink(phoneNumber, name);
+    
+    if (whatsappLink) {
+        window.open(whatsappLink, '_blank');
+    } else {
+        showSweetAlert('Invalid phone number format. Please check the contact number.', 'error');
+    }
+}
 
 // Check authentication
 function checkAuth() {
